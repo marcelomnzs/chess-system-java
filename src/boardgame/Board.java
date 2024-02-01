@@ -23,25 +23,25 @@ public class Board {
     }
 
     public Piece piece(Integer row, Integer column) {
-        if(!this.positionExists(row, column)) {
+        if(!positionExists(row, column)) {
             throw new BoardException("Position not on the board");
         }
-        return this.pieces[row][column];
+        return pieces[row][column];
     }
 
     public Piece piece(Position position) {
-        if(!this.positionExists(position)) {
+        if(!positionExists(position)) {
             throw new BoardException("Position not on the board");
         }
         return pieces[position.getRow()][position.getColumn()];
     }
 
     public void placePiece(Piece piece, Position position) {
-        if(this.thereIsAPiece(position)) {
+        if(thereIsAPiece(position)) {
             throw new BoardException("There is already a piece on position: " + position);
         }
 
-        this.pieces[position.getRow()][position.getColumn()] = piece;
+        pieces[position.getRow()][position.getColumn()] = piece;
         piece.position = position;
     }
 
@@ -56,22 +56,22 @@ public class Board {
 
         Piece aux = piece(position);
         aux.position = null;
-        this.pieces[position.getRow()][position.getColumn()] = null;
+        pieces[position.getRow()][position.getColumn()] = null;
         return aux; 
     }
 
     private Boolean positionExists(Integer row, Integer column) {
-        return row >= 0  && row < this.rows && column >= 0 && column < this.columns;
+        return row >= 0  && row < rows && column >= 0 && column < columns;
     }
 
     public Boolean positionExists(Position position) {
-        return this.positionExists(position.getRow(), position.getColumn());
+        return positionExists(position.getRow(), position.getColumn());
     }
 
     public Boolean thereIsAPiece(Position position) {
-        if(!this.positionExists(position)) {
+        if(!positionExists(position)) {
             throw new BoardException("Position not on the board");
         }
-        return this.piece(position) != null;
+        return piece(position) != null;
     }
 }

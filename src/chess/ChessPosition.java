@@ -24,7 +24,7 @@ public class ChessPosition {
     }
 
     protected Position toPosition() {
-        return new Position(8 - this.row, this.column - 'a');
+        return new Position(8 - row, column - 'a');
     }
 
     protected static ChessPosition fromPosition(Position position) {
@@ -33,6 +33,6 @@ public class ChessPosition {
 
     @Override
     public String toString() {
-        return "" + this.column + this.row;
+        return "" + column + row;
     }
 }
