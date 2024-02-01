@@ -15,7 +15,7 @@ public class ChessMatch {
     }
 
     public ChessPiece[][] getPieces() {
-        ChessPiece[][] mat = new ChessPiece[this.board.getRows()][this.board.getColumns()];
+        ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColumns()];
         
         for (int i = 0; i < board.getRows(); i++) {
             for (int j = 0; j < board.getColumns(); j++) {
@@ -37,9 +37,9 @@ public class ChessMatch {
     }
 
     private Piece makeMove(Position source, Position target) {
-        Piece p = this.board.removePiece(source);
-        Piece capturedPiece = this.board.removePiece(target);
-        this.board.placePiece(p, target);
+        Piece p = board.removePiece(source);
+        Piece capturedPiece = board.removePiece(target);
+        board.placePiece(p, target);
 
         return capturedPiece;
     }
@@ -48,10 +48,14 @@ public class ChessMatch {
         if(!board.thereIsAPiece(position)) {
             throw new ChessException("There is no piece on source position");
         }
+
+        if(!board.piece(position).isThereAnyPossibleMove()) {
+            throw new ChessException("There is no possible moves for the chosen piece");
+        }
     }
 
     private void placeNewPiece(Character column, Integer row, ChessPiece piece) {
-        this.board.placePiece(piece, new ChessPosition(column, row).toPosition());
+        board.placePiece(piece, new ChessPosition(column, row).toPosition());
     }
 
     private void initialSetup() {
